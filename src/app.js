@@ -2,14 +2,16 @@ console.log('App.js is running!');
 
 //JSX Java Script XML, it is a javascript extension
 var appObject = {
-    title: "hello",
-    subTitle: "World"
+    title: "This is the title field",
+    subTitle: "World",
+    options : ['One', 'Two']
 }
 
 var template = (
     <div>
-        <h1>{appObject.title}</h1>
-        <p>{appObject.subTitle}</p>
+        {appObject && <h1>{appObject.title}</h1> }
+        {appObject.subTitle && <p>{appObject.subTitle}</p>}
+        <p> {appObject.options.length > 0? 'Here are your options.': 'No options'}</p>
         <ol>
             <li>Item one</li>
             <li>Item two</li>
@@ -19,18 +21,27 @@ var template = (
 
 //Create a templateTwo Variable
 var user = {
-    userName : 'TsudoDog',
-    userAge : 27,
-    userLocation : 'Saint Paul'
+    name : 'TsudoDog',
+    age : 27,
+    location : 'Saint Paul'
+};
+
+function getLocation(location){
+    if(location){
+        return <p>location: {location}</p>;
+    }else{
+        return <p>location: N/A</p>;
+    }
 }
-var userName = 'TsudoDog';
-var userAge = 27;
-var userLocation = 'Saint Paul';
+
+
+
 var templateTwo = (
     <div>
-        <h1>{user.userName.toUpperCase()}</h1>
-        <p>Age: {userAge}</p>
-        <p>Location: {userLocation}</p>
+        <h1>{user.name ? user.name.toUpperCase() : "Anonymous"}</h1>
+        {user.age && user.age >= 18 && <p>Age: {user.age}</p>}
+        {getLocation(user.location)}
+
 
     </div>
 );

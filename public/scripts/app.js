@@ -4,22 +4,29 @@ console.log('App.js is running!');
 
 //JSX Java Script XML, it is a javascript extension
 var appObject = {
-    title: "hello",
-    subTitle: "World"
+    title: "This is the title field",
+    subTitle: "World",
+    options: ['One', 'Two']
 };
 
 var template = React.createElement(
     "div",
     null,
-    React.createElement(
+    appObject && React.createElement(
         "h1",
         null,
         appObject.title
     ),
-    React.createElement(
+    appObject.subTitle && React.createElement(
         "p",
         null,
         appObject.subTitle
+    ),
+    React.createElement(
+        "p",
+        null,
+        " ",
+        appObject.options.length > 0 ? 'Here are your options.' : 'No options'
     ),
     React.createElement(
         "ol",
@@ -39,33 +46,43 @@ var template = React.createElement(
 
 //Create a templateTwo Variable
 var user = {
-    userName: 'TsudoDog',
-    userAge: 27,
-    userLocation: 'Saint Paul'
+    name: 'TsudoDog',
+    age: 27,
+    location: 'Saint Paul'
 };
-var userName = 'TsudoDog';
-var userAge = 27;
-var userLocation = 'Saint Paul';
+
+function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            "p",
+            null,
+            "location: ",
+            location
+        );
+    } else {
+        return React.createElement(
+            "p",
+            null,
+            "location: N/A"
+        );
+    }
+}
+
 var templateTwo = React.createElement(
     "div",
     null,
     React.createElement(
         "h1",
         null,
-        user.userName.toUpperCase()
+        user.name ? user.name.toUpperCase() : "Anonymous"
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         "p",
         null,
         "Age: ",
-        userAge
+        user.age
     ),
-    React.createElement(
-        "p",
-        null,
-        "Location: ",
-        userLocation
-    )
+    getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
