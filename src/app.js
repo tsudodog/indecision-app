@@ -1,13 +1,13 @@
 console.log('App.js is running!');
 
 //JSX Java Script XML, it is a javascript extension
-var appObject = {
+const appObject = {
     title: "This is the title field",
     subTitle: "World",
     options : ['One', 'Two']
 }
 
-var template = (
+const template = (
     <div>
         {appObject && <h1>{appObject.title}</h1> }
         {appObject.subTitle && <p>{appObject.subTitle}</p>}
@@ -20,7 +20,7 @@ var template = (
 );
 
 //Create a templateTwo Variable
-var user = {
+const user = {
     name : 'TsudoDog',
     age : 27,
     location : 'Saint Paul'
@@ -36,7 +36,7 @@ function getLocation(location){
 
 
 
-var templateTwo = (
+const templateTwo = (
     <div>
         <h1>{user.name ? user.name.toUpperCase() : "Anonymous"}</h1>
         {user.age && user.age >= 18 && <p>Age: {user.age}</p>}
@@ -47,6 +47,6 @@ var templateTwo = (
 );
 
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
