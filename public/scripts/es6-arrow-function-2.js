@@ -27,6 +27,8 @@ const user2 = {
             return this.name + ' has lived in ' + city;
         });
 
+        // SEMANTICALLY EQUIVALENT 
+        // const cityMessages = this.cities.map((city) => this.name + ' has lived in ' + city);
         console.log(cityMessages);
 
         this.cities.forEach(city => {
@@ -38,4 +40,22 @@ const user2 = {
     }
 };
 
+const multiplier2 = {
+    // numbers - array of numbers we want to multiply
+    numbers: [1, 2, 3, 4, 5],
+    // multiplyBy - Single number
+    multiplyBy: 4,
+    multiply: function () {
+        console.log('this is new');
+        debugger;
+        let newArr = this.numbers.map(currentNumber => {
+            return this.multiplyBy * currentNumber;
+        });
+        console.log('did a thing');
+        console.log(newArr);
+    }
+};
+
 user2.printPlacesLived();
+
+multiplier2.multiply();
