@@ -21,6 +21,14 @@ const  user2 = {
         // this.cities.forEach(function( city ){
         //     console.log(that.name, '\t has lived in ', city)
         // })
+
+        // Map lets you return a transformed array, this is pretty cool! 
+        const cityMessages = this.cities.map((city) => {
+            return this.name + ' has lived in ' + city;
+        })
+
+        console.log(cityMessages);
+
         this.cities.forEach((city) => {
             console.log(this.name, ' has lived in ', city);
         })
