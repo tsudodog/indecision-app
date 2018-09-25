@@ -47,12 +47,12 @@ const multiplier2 = {
     multiplyBy: 4,
     multiply: function(){
         console.log('this is new');
-        debugger;
         let newArr =  this.numbers.map( (currentNumber) => {
             return this.multiplyBy * currentNumber;
         });
         console.log('did a thing');
         console.log(newArr);
+        console.log('done')
 
         
 

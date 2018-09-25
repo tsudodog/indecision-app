@@ -6,85 +6,104 @@ console.log('App.js is running!');
 var appObject = {
     title: "This is the title field",
     subTitle: "World",
-    options: ['One', 'Two']
+    options: []
 };
 
-var template = React.createElement(
-    "div",
-    null,
-    appObject && React.createElement(
-        "h1",
-        null,
-        appObject.title
-    ),
-    appObject.subTitle && React.createElement(
-        "p",
-        null,
-        appObject.subTitle
-    ),
-    React.createElement(
-        "p",
-        null,
-        " ",
-        appObject.options.length > 0 ? 'Here are your options.' : 'No options'
-    ),
-    React.createElement(
-        "ol",
-        null,
-        React.createElement(
-            "li",
-            null,
-            "Item one"
-        ),
-        React.createElement(
-            "li",
-            null,
-            "Item two"
-        )
-    )
-);
-
-//Create a templateTwo Variable
-var user = {
-    name: 'TsudoDog',
-    age: 27,
-    location: 'Saint Paul'
-};
-
-function getLocation(location) {
-    if (location) {
-        return React.createElement(
-            "p",
-            null,
-            "location: ",
-            location
-        );
-    } else {
-        return React.createElement(
-            "p",
-            null,
-            "location: N/A"
-        );
+var onFormSubmit = function onFormSubmit(e) {
+    // stop full page refresh
+    e.preventDefault();
+    console.log('Form Submitted');
+    var option = e.target.elements.option.value;
+    if (option) {
+        appObject.options.push(option);
+        e.target.elements.option.value = '';
     }
-}
+    rerenderApp();
+};
 
-var templateTwo = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        user.name ? user.name.toUpperCase() : "Anonymous"
-    ),
-    user.age && user.age >= 18 && React.createElement(
-        "p",
-        null,
-        "Age: ",
-        user.age
-    ),
-    getLocation(user.location)
-);
+var removeAll = function removeAll() {
+
+    appObject.options = [];
+    rerenderApp();
+};
+
+var onMakeDescision = function onMakeDescision() {
+    var randomNum = Math.floor(Math.random() * appObject.options.length);
+    var option = appObject.options[randomNum];
+    alert(option);
+};
+
+var numbers = [55, 101, 1000];
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var rerenderApp = function rerenderApp() {
+    var template = React.createElement(
+        "div",
+        null,
+        appObject && React.createElement(
+            "h1",
+            null,
+            appObject.title
+        ),
+        appObject.subTitle && React.createElement(
+            "p",
+            null,
+            appObject.subTitle
+        ),
+        React.createElement(
+            "p",
+            null,
+            " ",
+            appObject.options.length > 0 ? 'Here are your options.' : 'No options'
+        ),
+        React.createElement(
+            "button",
+            { onClick: removeAll },
+            "Remove All"
+        ),
+        React.createElement(
+            "button",
+            { disabled: appObject.options.length === 0, onClick: onMakeDescision },
+            "Make Decision"
+        ),
+        React.createElement(
+            "p",
+            null,
+            appObject.options.length
+        ),
+        numbers.map(function (number) {
+            return React.createElement(
+                "p",
+                { key: number },
+                "Number: ",
+                number
+            );
+        }),
+        React.createElement(
+            "ol",
+            null,
+            appObject.options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    { key: option },
+                    option
+                );
+            })
+        ),
+        React.createElement(
+            "form",
+            { onSubmit: onFormSubmit },
+            React.createElement("input", { type: "text", name: "option" }),
+            React.createElement(
+                "button",
+                null,
+                "Add Option"
+            )
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+rerenderApp();
