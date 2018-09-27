@@ -29,7 +29,6 @@ var IndecisionApp = function (_React$Component) {
                 React.createElement(Header, { title: title, subTitle: subTitle }),
                 React.createElement(Action, null),
                 React.createElement(Options, { options: options }),
-                React.createElement(RemoveAllButton, null),
                 React.createElement(AddOption, null)
             );
         }
@@ -103,19 +102,22 @@ var Action = function (_React$Component3) {
     return Action;
 }(React.Component);
 
-var RemoveAllButton = function (_React$Component4) {
-    _inherits(RemoveAllButton, _React$Component4);
+var Options = function (_React$Component4) {
+    _inherits(Options, _React$Component4);
 
-    function RemoveAllButton() {
-        _classCallCheck(this, RemoveAllButton);
+    function Options(props) {
+        _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (RemoveAllButton.__proto__ || Object.getPrototypeOf(RemoveAllButton)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+        return _this4;
     }
 
-    _createClass(RemoveAllButton, [{
+    _createClass(Options, [{
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
-            alert('removeAll');
+            console.log(this.props);
         }
     }, {
         key: 'render',
@@ -124,42 +126,18 @@ var RemoveAllButton = function (_React$Component4) {
                 'div',
                 null,
                 React.createElement(
-                    'button',
-                    { onClick: this.handleRemoveAll },
-                    ' Remove All'
-                )
-            );
-        }
-    }]);
-
-    return RemoveAllButton;
-}(React.Component);
-
-var Options = function (_React$Component5) {
-    _inherits(Options, _React$Component5);
-
-    function Options() {
-        _classCallCheck(this, Options);
-
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
-    }
-
-    _createClass(Options, [{
-        key: 'render',
-        value: function render() {
-            return React.createElement(
-                'div',
-                null,
-                this.props.options.length,
-                this.props.options.map(function (s) {
-                    return React.createElement(Option, { key: s, optionText: s });
-                }),
-                React.createElement(
                     'h1',
                     null,
                     'Options'
                 ),
-                React.createElement(Option, null)
+                React.createElement(
+                    'button',
+                    { onClick: this.handleRemoveAll },
+                    ' Remove All'
+                ),
+                this.props.options.map(function (s) {
+                    return React.createElement(Option, { key: s, optionText: s });
+                })
             );
         }
     }]);
@@ -167,8 +145,8 @@ var Options = function (_React$Component5) {
     return Options;
 }(React.Component);
 
-var AddOption = function (_React$Component6) {
-    _inherits(AddOption, _React$Component6);
+var AddOption = function (_React$Component5) {
+    _inherits(AddOption, _React$Component5);
 
     function AddOption() {
         _classCallCheck(this, AddOption);
@@ -213,8 +191,8 @@ var AddOption = function (_React$Component6) {
     return AddOption;
 }(React.Component);
 
-var Option = function (_React$Component7) {
-    _inherits(Option, _React$Component7);
+var Option = function (_React$Component6) {
+    _inherits(Option, _React$Component6);
 
     function Option() {
         _classCallCheck(this, Option);

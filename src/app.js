@@ -8,7 +8,6 @@ class IndecisionApp extends React.Component {
                     <Header title={title} subTitle={subTitle}/>
                     <Action/>
                     <Options options={options}/>
-                    <RemoveAllButton/>
                     <AddOption/>
                 </div>
         )
@@ -42,28 +41,23 @@ class Action extends React.Component {
 }
 
 
-class RemoveAllButton extends React.Component{
-    handleRemoveAll(){
-        alert('removeAll');
-    }
 
-    render(){
-        return(
-            <div>
-                <button onClick={this.handleRemoveAll}> Remove All</button>
-            </div>
-        )
-    }
-}
 
 class Options extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
+
+    handleRemoveAll(){
+        console.log(this.props);
+    }
     render(){
         return (
             <div>
-                {this.props.options.length}
-                {this.props.options.map( s => <Option key={s} optionText={s}/>)}
                 <h1>Options</h1>
-                <Option></Option>
+                <button onClick={this.handleRemoveAll}> Remove All</button>
+                {this.props.options.map( s => <Option key={s} optionText={s}/>)}
             </div>
         )
     }
