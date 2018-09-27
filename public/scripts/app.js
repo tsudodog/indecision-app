@@ -20,12 +20,15 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'render',
         value: function render() {
+            var title = 'Indecision';
+            var subTitle = 'Put Your life in the hands of a computer';
+            var options = ['thing one', 'thing two', 'thing three'];
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: title, subTitle: subTitle }),
                 React.createElement(Action, null),
-                React.createElement(Options, null),
+                React.createElement(Options, { options: options }),
                 React.createElement(AddOption, null)
             );
         }
@@ -46,18 +49,19 @@ var Header = function (_React$Component2) {
     _createClass(Header, [{
         key: 'render',
         value: function render() {
+            console.log(this.props);
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
                     'h1',
                     null,
-                    'Indecision'
+                    this.props.title
                 ),
                 React.createElement(
                     'h2',
                     null,
-                    'Put your life in the hands of a computer!'
+                    this.props.subTitle
                 )
             );
         }
@@ -108,6 +112,10 @@ var Options = function (_React$Component4) {
             return React.createElement(
                 'div',
                 null,
+                this.props.options.length,
+                this.props.options.map(function (s) {
+                    return React.createElement(Option, { key: s, optionText: s });
+                }),
                 React.createElement(
                     'h1',
                     null,
@@ -160,13 +168,19 @@ var Option = function (_React$Component6) {
     _createClass(Option, [{
         key: 'render',
         value: function render() {
+
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
+                    'h1',
+                    null,
+                    'Option'
+                ),
+                React.createElement(
                     'label',
                     null,
-                    'Option Component'
+                    this.props.optionText
                 )
             );
         }
