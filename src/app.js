@@ -8,6 +8,7 @@ class IndecisionApp extends React.Component {
                     <Header title={title} subTitle={subTitle}/>
                     <Action/>
                     <Options options={options}/>
+                    <RemoveAllButton/>
                     <AddOption/>
                 </div>
         )
@@ -28,10 +29,28 @@ class Header extends React.Component {
 
 
 class Action extends React.Component {
+    handlePick(){
+        alert('handlePick');
+    }
     render(){
         return (
             <div>
-                <button>What should I do?</button>
+                <button onClick={this.handlePick}>What should I do?</button>
+            </div>
+        )
+    }
+}
+
+
+class RemoveAllButton extends React.Component{
+    handleRemoveAll(){
+        alert('removeAll');
+    }
+
+    render(){
+        return(
+            <div>
+                <button onClick={this.handleRemoveAll}> Remove All</button>
             </div>
         )
     }
@@ -51,11 +70,25 @@ class Options extends React.Component {
 }
 
 class AddOption extends React.Component{
+    handleAddOption(e){
+        // stop full page refresh
+        e.preventDefault();
+        console.log('Form Submitted');
+        const option = e.target.elements.option.value.trim();
+        if(option){
+            alert(option);
+            // appObject.options.push(option);
+            // e.target.elements.option.value = '';
+        }
+        //rerenderApp();
+    }
     render(){
         return(
             <div>
-                <h1>add options</h1>
-               
+                <form onSubmit={this.handleAddOption}>
+                    <input type="text" name="option"></input>
+                    <button  >Add Option</button>
+               </form>
             </div>
         )
     }
@@ -67,7 +100,6 @@ class Option extends React.Component{
         
         return (
             <div>
-            <h1>Option</h1>
                 <label>{this.props.optionText}</label>
             </div>
         )
