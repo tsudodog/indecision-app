@@ -33,6 +33,25 @@ class Student extends Person {
 }
 
 
+class Traveler extends Person {
+    constructor(name, age, homelocation){
+        super(name, age);
+        this.homelocation = homelocation;
+    }
+
+    getGreeting(){
+        let superGreeting = super.getGreeting();
+        if(this.homelocation){
+            return superGreeting += ` Visiting from ${this.homelocation}`
+        }
+    }
+}
+
+
+
+
+
+
 
 const me = new Person('Alex');
 const notMe = new Person();

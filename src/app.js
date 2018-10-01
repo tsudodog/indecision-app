@@ -37,11 +37,11 @@ class IndecisionApp extends React.Component {
 
     }
     render(){
-        const title = 'Indecision';
         const subTitle = 'Put Your life in the hands of a computer';
         return(
                 <div>
-                    <Header title={title} subTitle={subTitle}/>
+                    <Header 
+                    subTitle={subTitle}/>
                     <Action
                         hasOptions={this.state.options.length > 0}
                         handlePick={this.handlePick}
@@ -53,57 +53,54 @@ class IndecisionApp extends React.Component {
                     <AddOption
                         handleAddOption = {this.handleAddOption}
                     />
+                    <div>
+                     <User
+                        name="Alex"
+                        age="27"
+                     />
+                    </div>
                 </div>
-        )
-    }
-}
-
-class Header extends React.Component { 
-    render(){
-        console.log(this.props);
-        return (
-            <div>
-                <h1>{this.props.title}</h1>
-                <h2>{this.props.subTitle}</h2>
-            </div>   
+              
         )
     }
 }
 
 
-class Action extends React.Component {
+const Header = (props) => {
+    return (
+        <div>
+            <h1>{props.title}</h1>
+            {props.subTitle && <h2>{props.subTitle}</h2>}
+        </div>   
+    )
+}
 
-    
-  
-    render(){
-        return (
-            <div>
-                <button
-                    onClick={this.props.handlePick}
-                    disabled={!this.props.hasOptions}             
-                    >What should I do?</button>
-            </div>
-        )
-    }
+Header.defaultProps = {
+    title : 'Indecision',
 }
 
 
 
+const Action = (props) => {
+    return (
+        <div>
+            <button
+                onClick={props.handlePick}
+                disabled={!props.hasOptions}             
+                >What should I do?</button>
+        </div>
+    )
+}
 
-class Options extends React.Component {
-    constructor(props){
-        super(props);
-    }
 
-    render(){
-        return (
-            <div>
-                <h1>Options</h1>
-                <button onClick={this.props.handleDeleteOptions}> Remove All</button>
-                {this.props.options.map( s => <Option key={s} optionText={s}/>)}
-            </div>
-        )
-    }
+const Options = (props) => {
+    return (
+        <div>
+            <h1>Options</h1>
+            <button onClick={props.handleDeleteOptions}> Remove All</button>
+            {props.options.map( s => <Option key={s} optionText={s}/>)}
+        </div>
+    )
 }
 
 class AddOption extends React.Component{
@@ -142,17 +139,25 @@ class AddOption extends React.Component{
 }
 
 
-class Option extends React.Component{
-    render(){
-        
-        return (
-            <div>
-                <label>{this.props.optionText}</label>
-            </div>
-        )
-    }
+const User = (props) => {
+    return(
+        <div>
+            <p>User: {props.name} </p>
+            <p>Age: {props.age}</p>
+        </div>
+    )
 }
 
+
+
+
+const Option = (props) => {
+    return (
+        <div>
+            <label>{props.optionText}</label>
+        </div>
+    )
+}
 
 
 ReactDOM.render(<IndecisionApp></IndecisionApp>, document.getElementById('app'));
