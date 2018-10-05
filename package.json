@@ -6,8 +6,16 @@
   "repository": "git@github.com:tsudodog/indecision-app.git",
   "author": "tsudodog <malamute29@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "serve": "live-server public",
+    "build-babel": " --watch"
+    , "build" : "webpack --watch"
+  },
   "dependencies": {
+    "babel-cli": "6.24.1",
     "babel-preset-env": "1.5.2",
-    "babel-preset-react": "6.24.1"
+    "babel-preset-react": "6.24.1",
+    "live-server": "^1.2.0",
+    "webpack": "3.1.0"
   }
 }
