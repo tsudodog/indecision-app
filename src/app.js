@@ -1,7 +1,8 @@
 // import './utils.js';
-import {square, add} from './utils.js';
-console.log('app.js is running');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp'
 
-console.log(square(2))
 
-console.log(add(100, 23))
+
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
