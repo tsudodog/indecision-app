@@ -1,21 +1,16 @@
-import React from 'react'
-import AddOption from './AddOption'
-import Options from './Options'
-import Header from './Header'
-import Action from './Action'
+import React from 'react';
+import AddOption from './AddOption';
+import Options from './Options';
+import Header from './Header';
+import Action from './Action';
+import OptionModal from './OptionModal';
 
 class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handlePick = this.handlePick.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
-        this.state = {
-            options: props.options
+    state = {
+        options: [],
+        selectedOption : undefined
+    };
 
-        };
-    }
 
     componentDidMount(){
         try{
@@ -41,7 +36,7 @@ class IndecisionApp extends React.Component {
     componentWillUnmount(){
         console.log('componentWillUnmount');
     }
-    handleAddOption(option) {
+    handleAddOption = (option) => {
         if (!option) {
             return 'Enter Valid Value to Add Item';
         } else if (this.state.options.indexOf(option) > -1) {
@@ -50,18 +45,22 @@ class IndecisionApp extends React.Component {
         this.setState((prevState) => ({ options: prevState.options.concat(option) }));
 
     }
-    handleDeleteOptions() {
+    handleDeleteOptions= () => {
         this.setState(() => ({ options: [] }));
     };
-    handleDeleteOption(option) {
+    handleDeleteOption = (option) => {
         this.setState((prevState) => ({ options: prevState.options.filter((o) => { return o != option }) }));
     }
 
-    handlePick() {
+    handlePick = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
-        alert(option);
+        this.setState(()=> ({ selectedOption : option}));
 
+    }
+
+    handleClearSelectedOption = () => {
+        this.setState(() => ({selectedOption : undefined}));
     }
     render() {
         const subTitle = 'Put Your life in the hands of a computer';
@@ -80,6 +79,10 @@ class IndecisionApp extends React.Component {
                 />
                 <AddOption
                     handleAddOption={this.handleAddOption}
+                />
+                <OptionModal 
+                    selectedOption={this.state.selectedOption}
+                    handleClearSelectedOption = {this.handleClearSelectedOption}
                 />
 
             </div>
